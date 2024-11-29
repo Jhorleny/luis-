@@ -1,0 +1,30 @@
+CREATE DATABASE sistema_cursos;
+
+USE sistema_cursos;
+
+
+CREATE TABLE cursos (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    nombre VARCHAR(100) NOT NULL,      
+    descripcion TEXT,               
+    fecha_inicio DATE,                 
+    fecha_fin DATE,                   
+    cupos INT                        
+);
+
+CREATE TABLE inscripciones (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    nombre VARCHAR(100) NOT NULL,      
+    correo VARCHAR(150) NOT NULL UNIQUE, 
+    telefono VARCHAR(15),             
+    curso_id INT NOT NULL,             
+    fecha_inscripcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    FOREIGN KEY (curso_id) REFERENCES cursos(id) 
+);
+
+-- Insertar datos de ejemplo en la tabla 'cursos'
+INSERT INTO cursos (nombre, descripcion, fecha_inicio, fecha_fin, cupos)
+VALUES 
+    ('Curso de Programación en Python', 'Aprende los fundamentos de Python desde cero.', '2024-12-01', '2024-12-30', 30),
+    ('Curso de Desarrollo Web', 'Crea sitios web modernos con HTML, CSS y JavaScript.', '2024-12-05', '2025-01-10', 20),
+    ('Curso de Bases de Datos', 'Domina la creación y gestión de bases de datos con MySQL.', '2024-12-10', '2025-01-15', 25);
